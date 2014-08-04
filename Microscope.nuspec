@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata schemaVersion="2">
+    <id>Microscope</id>
+    <version>1.0.0</version>
+    <authors>Will Charczuk</authors>
+    <owners>Will Charcuzk</owners>
+    <iconUrl>http://www.clotheshor.se/content/images/clotheshorse_logo_blk.png</iconUrl>
+    <projectUrl>https://github.com/clotheshorse/microscope</projectUrl>
+    <licenseUrl>https://raw.github.com/ClothesHorse/Microscope/master/LICENSE.md</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <summary>A high performance text evaluator.</summary>
+    <description>A high performance text evaluator.</description>
+    <releaseNotes>
+      * 1.0.0         - Initial Release.
+    </releaseNotes>
+    <copyright>Copyright ClothesHorse, 2014</copyright>
+    <tags>text regular-expression regex</tags>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System.Core"/>
+      <frameworkAssembly assemblyName="System"/>
+      <frameworkAssembly assemblyName="System.Data"/>
+      <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework=".NETFramework4.0-Client, .NETFramework4.0" />
+    </frameworkAssemblies>
+    <dependencies>
+    </dependencies>
+  </metadata>
+    <files>
+        <file src="Microscope NET40\bin\Release\Microscope.dll" target="lib\net40" />
+        <file src="Microscope NET40\bin\Release\Microscope.pdb" target="lib\net40" />
+        <file src="Microscope NET40\bin\Release\Microscope.xml" target="lib\net40" />
+        <file src="Microscope NET45\bin\Release\Microscope.dll" target="lib\net45" />
+        <file src="Microscope NET45\bin\Release\Microscope.pdb" target="lib\net45" />
+        <file src="Microscope NET45\bin\Release\Microscope.xml" target="lib\net45" />
+    </files>
+</package>

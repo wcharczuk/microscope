@@ -1,0 +1,21 @@
+[Pp]ackages/
+[Pp]recompile/
+[Oo]bj/
+[Bb]in/
+[Dd]ebug*/
+[Rr]elease*/
+[Tt]est Results*/
+*.mdf
+*.ldf
+*.user
+*.suo
+*.log
+*.vsp
+*.vsmdi
+*.psess
+_Resharper.*
+*.resharper
+[Tt]humbs.db
+
+# mac os x index files
+*.DS_Store
