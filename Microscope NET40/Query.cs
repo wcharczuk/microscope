@@ -678,7 +678,7 @@ namespace Microscope
         {
             return corpus.ToLower().Contains(expression.ToLower());
         }
-
+        
         private static bool _startswith(string corpus, string expression)
         {
             return corpus.StartsWith(expression);
@@ -686,7 +686,7 @@ namespace Microscope
 
         private static bool _startswithi(string corpus, string expression)
         {
-            return corpus.ToLower().StartsWith(expression.ToLower());
+            return corpus.StartsWith(expression, StringComparison.InvariantCultureIgnoreCase);
         }
 
         private static bool _endswith(string corpus, string expression)
@@ -696,7 +696,7 @@ namespace Microscope
 
         private static bool _endswithi(string corpus, string expression)
         {
-            return corpus.ToLower().EndsWith(expression.ToLower());
+            return corpus.EndsWith(expression, StringComparison.InvariantCultureIgnoreCase);
         }
 
         private static bool _matches(string corpus, string expression)
