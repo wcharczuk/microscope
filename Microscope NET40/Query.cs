@@ -328,7 +328,15 @@ namespace Microscope
                                     nodes.Add(new_node_id, working_unary_node);
                                     working_unary_node = null;
 
-                                    further_reduced_query = further_reduced_query.Substring(0, unary_block_start) + new_node_id + further_reduced_query.Substring(x + 1);
+                                    var block_length = x - unary_block_start;
+                                    if (x == further_reduced_query.Length - 1)
+                                    {
+                                        block_length++;
+                                    }
+
+                                    var old_block = further_reduced_query.Substring(unary_block_start, block_length);
+
+                                    further_reduced_query = further_reduced_query.Replace(old_block, new_node_id);
 
                                     x = 0;
                                     state = 0;
@@ -412,7 +420,6 @@ namespace Microscope
 
                                 if (char.IsWhiteSpace(c) || x == further_reduced_query.Length - 1)
                                 {
-
                                     if (x == further_reduced_query.Length - 1) { node_id += c; }
 
                                     var node = nodes[node_id];

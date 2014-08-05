@@ -107,15 +107,20 @@ namespace Microscope.Test
 			Assert.False(microscope.Evaluate("http://www.clotheshor.se/product/team"));
 			Assert.False(microscope.Evaluate("http://google.com/admin/product"));
 			Assert.False(microscope.Evaluate("http://google.com/product"));
-
-			var m2 = new QueryEvaluator ("(contains('test') or contains('will')) and (not contains('google') or not contains('clotheshorse'))");
-			Assert.True(m2.Evaluate("test words win"));
-			Assert.True(m2.Evaluate("will words win"));
-			Assert.False(m2.Evaluate("will google win"));
-			Assert.False(m2.Evaluate("test google win"));
-			Assert.False(m2.Evaluate("will clotheshorse win"));
-			Assert.False(m2.Evaluate("test clotheshorse win"));
 		}
+
+        [Test]
+        public void Parse_MultipleBlocks_Or_Test()
+        {
+            var query = "(contains('test') or contains('will')) and not contains('google') and not contains('clotheshorse')";
+            var m2 = new QueryEvaluator(query);
+            Assert.True(m2.Evaluate("test words win"));
+            Assert.True(m2.Evaluate("will words win"));
+            Assert.False(m2.Evaluate("will google win"));
+            Assert.False(m2.Evaluate("test google win"));
+            Assert.False(m2.Evaluate("will clotheshorse win"));
+            Assert.False(m2.Evaluate("test clotheshorse win"));
+        }
 
 		[Test]
 		public void Parse_InvalidSyntax_Test()
