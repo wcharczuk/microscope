@@ -19,11 +19,11 @@ Or download the source and compile the binary yourself and add it as a reference
 * matches("expr") : an alias to C# System.Text.RegularExpressions.Regex.IsMatch()
 * matchesi("expr") : an alias to C# System.Text.RegularExpressions.Regex.IsMatch() with RegexOptions.IgnoreCase
 * contains("expr") : an alias to C# the_string.Contains("expr")
-* containsi("expr") : an alias to C# the_string.ToLower().Contains("expr".ToLower()) -- this can be tuned with a better equality comparer
+* containsi("expr") : an alias to C# the_string.ToLower().Contains("expr".ToLower())
 * startswith("expr") : an alias to C# the_string.StartsWith("expr")
-* startswithi("expr") : an alias to C# the_string.ToLower().StartsWith("expr".ToLower()) -- this can be tuned with a better equality comparer
+* startswithi("expr") : an alias to C# the_string.ToLower().StartsWith("expr".ToLower())
 * endswith("expr") : an alias to C# the_string.EndsWith("expr")
-* endswithi("expr") : an alias to C# the_string.ToLower().EndsWith("expr".ToLower()) -- this can be tuned with a better equality comparer
+* endswithi("expr") : an alias to C# the_string.ToLower().EndsWith("expr".ToLower())
 * equals("expr") : an alias to C# the_string.Equals("expr")
 * equalsi("expr") : an alias to C# the_string.Equals("expr", StringComparison.InvariantCultureIgnoreCase) 
 * isempty() : an alias to C# String.IsNullOrEmpty(the_string)
