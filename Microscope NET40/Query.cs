@@ -676,7 +676,7 @@ namespace Microscope
 
         private static bool _containsi(string corpus, string expression)
         {
-            return corpus.ToLower().Contains(expression.ToLower());
+			return corpus.IndexOf(expression, StringComparison.InvariantCultureIgnoreCase) >= 0;
         }
         
         private static bool _startswith(string corpus, string expression)
