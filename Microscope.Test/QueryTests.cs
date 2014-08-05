@@ -116,6 +116,7 @@ namespace Microscope.Test
             try
             {
                 var query_tree = microscope.Parse("(matches('(.*)') and contains('hello')"); //missing brace on block
+				Assert.Null(query_tree);
             }
             catch (ParserException)
             {
@@ -127,6 +128,7 @@ namespace Microscope.Test
             try
             {
                 var query_tree = microscope.Parse("contains('TEST'"); //missing brace on function
+				Assert.Null(query_tree);
             }
             catch (ParserException)
             {
@@ -138,6 +140,7 @@ namespace Microscope.Test
             try
             {
                 var query_tree = microscope.Parse("somefunctionthatdoesntexist('hello')"); //invalid function
+				Assert.Null(query_tree);
             }
             catch (ParserException)
             {
@@ -150,6 +153,7 @@ namespace Microscope.Test
             try
             {
                 var query_tree = microscope.Parse("matches ('(this?)')"); //invalid whitespace whoopsie.
+				Assert.Null(query_tree);
             }
             catch (ParserException)
             {
@@ -162,6 +166,7 @@ namespace Microscope.Test
             try
             {
                 var query_tree = microscope.Parse("matches(THIS)"); //invalid no quotes around argument
+				Assert.Null(query_tree);
             }
             catch (ParserException)
             {
@@ -176,16 +181,13 @@ namespace Microscope.Test
         {
             var node = new BinaryNode()
             {
-                ExpressionType = System.Linq.Expressions.ExpressionType.AndAlso
-                ,
-                Left = new CallNode() { MethodName = "_matches", Argument = "(www.clotheshor.se)" }
-                ,
+                ExpressionType = System.Linq.Expressions.ExpressionType.AndAlso,
+                Left = new CallNode() { MethodName = "_matches", Argument = "(www.clotheshor.se)" },
                 Right = new UnaryNode()
                 {
                     Node = new CallNode()
                     {
-                        MethodName = "_contains"
-                        ,
+                        MethodName = "_contains",
                         Argument = "admin"
                     }
                 }
@@ -216,6 +218,7 @@ namespace Microscope.Test
                 var scope1 = new QueryEvaluator();
                 scope1.ParseAndCompile(query);
                 var result = scope1.Evaluate("http://www.clotheshor.se/product");
+				Assert.True (result);
             }
             sw.Stop();
 
@@ -229,6 +232,7 @@ namespace Microscope.Test
             for (int x = 0; x < 1024; x++)
             {
                 var result = scope2.Evaluate("http://www.clotheshor.se/product");
+				Assert.True (result);
             }
             sw.Stop();
 
