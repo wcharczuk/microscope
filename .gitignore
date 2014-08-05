@@ -17,6 +17,7 @@ _Resharper.*
 *.resharper
 [Tt]humbs.db
 *.nupkg
+*.userprefs
 
 # mac os x index files
 *.DS_Store
