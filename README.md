@@ -62,6 +62,16 @@ Logical Operators:
 * or : Binary operator equivalent to C# '||'
 * not : Unary operator equivalent to C# '!'
 
+###Future Plans###
+
+The main plans for future versions are the ability to mutate the evaluated string and pass that as an argument to other functions.
+
+Example mutators would be:
+
+* Substring(index), Substring(index, length) : Standard the_string.Substring() operations.
+* Extract(expr) : Would run the expression against the_string and would return the first match.
+* ToLower(), ToUpper() : the casing operations
+
 ###Pull Requests / Contributions###
 Keep them coming.
 
