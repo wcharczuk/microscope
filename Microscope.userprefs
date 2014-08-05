@@ -1,16 +1,19 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Microscope.Test/QueryTests.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Microscope NET40/Query.cs">
     <Files>
-      <File FileName="Microscope NET40/Query.cs" Line="3" Column="3" />
-      <File FileName="Microscope.Test/QueryTests.cs" Line="31" Column="31" />
+      <File FileName="Microscope NET40/Query.cs" Line="23" Column="23" />
+      <File FileName="Microscope.Test/QueryTests.cs" Line="5" Column="5" NotebookId="1" />
     </Files>
     <Pads>
-      <Pad Id="ProjectPad">
+      <Pad Id="MonoDevelop.NUnit.TestPad">
         <State expanded="True">
-          <Node name="Microscope NET40" selected="True" />
           <Node name="Microscope.Test" expanded="True">
-            <Node name="Packages" expanded="True" />
+            <Node name="Microscope" expanded="True" selected="True">
+              <Node name="Test" expanded="True">
+                <Node name="QueryTests" expanded="True" />
+              </Node>
+            </Node>
           </Node>
         </State>
       </Pad>
