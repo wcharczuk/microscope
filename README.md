@@ -14,26 +14,6 @@ Regular expressions are pretty bad at testing if text has certain elements, but 
 
 Or download the source and compile the binary yourself and add it as a reference.
 
-###Supported Functions###
-
-* matches("expr") : an alias to C# System.Text.RegularExpressions.Regex.IsMatch()
-* matchesi("expr") : an alias to C# System.Text.RegularExpressions.Regex.IsMatch() with RegexOptions.IgnoreCase
-* contains("expr") : an alias to C# the_string.Contains("expr")
-* containsi("expr") : an alias to C# the_string.ToLower().Contains("expr".ToLower()) -- this can be tuned with a better equality comparer
-* startswith("expr") : an alias to C# the_string.StartsWith("expr")
-* startswithi("expr") : an alias to C# the_string.ToLower().StartsWith("expr".ToLower()) -- this can be tuned with a better equality comparer
-* endswith("expr") : an alias to C# the_string.EndsWith("expr")
-* endswithi("expr") : an alias to C# the_string.ToLower().EndsWith("expr".ToLower()) -- this can be tuned with a better equality comparer
-* equals("expr") : an alias to C# the_string.Equals("expr")
-* equalsi("expr") : an alias to C# the_string.Equals("expr", StringComparison.InvariantCultureIgnoreCase) 
-* isempty() : an alias to C# String.IsNullOrEmpty(the_string)
-
-Logical Operators:
-
-* and : Binary operator equivalent to C# '&&'
-* or : Binary operator equivalent to C# '||'
-* not : Unary operator equivalent to C# '!'
-
 ###Examples###
 
 Example Queries:
@@ -61,6 +41,26 @@ Assert.False(evaluator.Evaluate("http://something.com/"));
 Assert.False(evaluator.Evaluate("http://something.com/product/50"));
 //etc.
 ```
+
+###Supported Functions###
+
+* matches("expr") : an alias to C# System.Text.RegularExpressions.Regex.IsMatch()
+* matchesi("expr") : an alias to C# System.Text.RegularExpressions.Regex.IsMatch() with RegexOptions.IgnoreCase
+* contains("expr") : an alias to C# the_string.Contains("expr")
+* containsi("expr") : an alias to C# the_string.IndexOf("expr", StringComparison.InvariantCultureIgnoreCase) >= 0;
+* startswith("expr") : an alias to C# the_string.StartsWith("expr")
+* startswithi("expr") : an alias to C# the_string.StartsWith("expr", StringComparison.InvariantCultureIgnoreCase)
+* endswith("expr") : an alias to C# the_string.EndsWith("expr")
+* endswithi("expr") : an alias to C# the_string.EndsWith("expr", StringComparison.InvariantCultureIgnoreCase)
+* equals("expr") : an alias to C# the_string.Equals("expr")
+* equalsi("expr") : an alias to C# the_string.Equals("expr", StringComparison.InvariantCultureIgnoreCase) 
+* isempty() : an alias to C# String.IsNullOrEmpty(the_string)
+
+Logical Operators:
+
+* and : Binary operator equivalent to C# '&&'
+* or : Binary operator equivalent to C# '||'
+* not : Unary operator equivalent to C# '!'
 
 ###Pull Requests / Contributions###
 Keep them coming.
