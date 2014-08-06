@@ -61,6 +61,7 @@ Assert.False(evaluator.Evaluate("http://something.com/product/50"));
 * equals(expr) : an alias to C# the_string.Equals(expr)
 * equalsi(expr) : an alias to C# the_string.Equals(expr, StringComparison.InvariantCultureIgnoreCase) 
 * isempty() : an alias to C# String.IsNullOrEmpty(the_string)
+* equals(expr, format) : returns the_string.Equals(String.Format(format, expr))
 * greaterthan(expr, format) : returns the_string.CompareTo(String.Format(format, expr)) > 0;
 * lessthan(expr, format) : returns the_string.CompareTo(String.Format(format, expr)) < 0;
 
