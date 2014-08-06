@@ -216,13 +216,13 @@ namespace Microscope.Test
 			var node = new BinaryNode()
 			{
 				ExpressionType = System.Linq.Expressions.ExpressionType.AndAlso,
-				Left = new CallNode() { MethodName = "_matches", Argument = "(www.clotheshor.se)" },
+				Left = new CallNode() { MethodName = "_matches", Arguments = new List<string>() { "(www.clotheshor.se)" } },
 				Right = new UnaryNode()
 				{
 					Node = new CallNode()
 					{
 						MethodName = "_contains",
-						Argument = "admin"
+						Arguments = new List<String>() { "admin" }
 					}
 				}
 			};
@@ -408,5 +408,25 @@ namespace Microscope.Test
 			Assert.True(q.Evaluate("test"));
 			Assert.False(q.Evaluate("something random"));
 		}
+
+        [Test]
+        public void GreaterThan_Test()
+        {
+            var q = new QueryEvaluator("greaterthan('2014-08-06', '{0:d}')");
+
+            Assert.True(q.Evaluate("2014-08-07"));
+            Assert.False(q.Evaluate("2014-08-06"));
+            Assert.False(q.Evaluate("2014-08-05"));
+        }
+
+        [Test]
+        public void LessThan_Test()
+        {
+            var q = new QueryEvaluator("lessthan('2014-08-06', '{0:d}')");
+
+            Assert.True(q.Evaluate("2014-08-05"));
+            Assert.False(q.Evaluate("2014-08-06"));
+            Assert.False(q.Evaluate("2014-08-07"));
+        }
 	}
 }

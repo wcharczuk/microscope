@@ -39,6 +39,8 @@ namespace Microscope
             "equals",
             "equalsi",
             "isempty",
+            "greaterthan",
+            "lessthan",
         };
 
         public static HashSet<String> LogicKeywords = new HashSet<string>()
@@ -669,12 +671,14 @@ namespace Microscope
             {
                 var argument_constants = new List<Expression>();
 
+                argument_constants.Add(the_string);
+
                 foreach (var argument in node.Arguments)
                 {
                     argument_constants.Add(Expression.Constant(argument));
                 }
 
-                return Expression.Call(typeof(QueryEvaluator), node.MethodName, null, the_string, argument_constants.ToArray());
+                return Expression.Call(typeof(QueryEvaluator), node.MethodName, null, argument_constants.ToArray());
             }
             else
             {
@@ -750,12 +754,12 @@ namespace Microscope
 
         static bool _greaterthan(string corpus, string expression, string format)
         {
-            return corpus > String.Format(format, expression);
+            return corpus.CompareTo(String.Format(format, expression)) > 0;
         }
 
         static bool _lessthan(string corpus, string expression, string format)
         {
-            return corpus < String.Format(format, expression);
+            return corpus.CompareTo(String.Format(format, expression)) < 0;
         }
     }
 }
