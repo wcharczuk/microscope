@@ -61,9 +61,11 @@ Assert.False(evaluator.Evaluate("http://something.com/product/50"));
 * equals(expr) : an alias to C# the_string.Equals(expr)
 * equalsi(expr) : an alias to C# the_string.Equals(expr, StringComparison.InvariantCultureIgnoreCase) 
 * isempty() : an alias to C# String.IsNullOrEmpty(the_string)
-* equals(expr, format) : returns the_string.Equals(String.Format(format, expr))
+* equals(expr, type) : returns the_string parsed as the specified type compared to expr parsed as the specified type
 * greaterthan(expr) : returns the_string.CompareTo(expr) > 0;
+* greaterthan(expr, type) : returns the_string parsed as the specified type, compared to expr, parsed as the specified type
 * lessthan(expr) : returns the_string.CompareTo(expr) < 0;
+* lessthan(expr, type) : returns the_string parsed as the specified type, compared to expr, parsed as the specified type
 
 Logical Operators:
 
