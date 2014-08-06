@@ -50,19 +50,19 @@ Assert.False(evaluator.Evaluate("http://something.com/product/50"));
 
 ###Supported Functions###
 
-* matches("expr") : an alias to C# System.Text.RegularExpressions.Regex.IsMatch()
-* matchesi("expr") : an alias to C# System.Text.RegularExpressions.Regex.IsMatch() with RegexOptions.IgnoreCase
-* contains("expr") : an alias to C# the_string.Contains("expr")
-* containsi("expr") : an alias to C# the_string.IndexOf("expr", StringComparison.InvariantCultureIgnoreCase) >= 0;
-* startswith("expr") : an alias to C# the_string.StartsWith("expr")
-* startswithi("expr") : an alias to C# the_string.StartsWith("expr", StringComparison.InvariantCultureIgnoreCase)
-* endswith("expr") : an alias to C# the_string.EndsWith("expr")
-* endswithi("expr") : an alias to C# the_string.EndsWith("expr", StringComparison.InvariantCultureIgnoreCase)
-* equals("expr") : an alias to C# the_string.Equals("expr")
-* equalsi("expr") : an alias to C# the_string.Equals("expr", StringComparison.InvariantCultureIgnoreCase) 
+* matches(expr) : an alias to C# System.Text.RegularExpressions.Regex.IsMatch(the_string, expr)
+* matchesi(expr) : an alias to C# System.Text.RegularExpressions.Regex.IsMatch(the string, expr) with RegexOptions.IgnoreCase
+* contains(expr) : an alias to C# the_string.Contains(expr)
+* containsi(expr) : an alias to C# the_string.IndexOf(expr, StringComparison.InvariantCultureIgnoreCase) >= 0;
+* startswith(expr) : an alias to C# the_string.StartsWith(expr)
+* startswithi(expr) : an alias to C# the_string.StartsWith(expr, StringComparison.InvariantCultureIgnoreCase)
+* endswith(expr) : an alias to C# the_string.EndsWith(expr)
+* endswithi(expr) : an alias to C# the_string.EndsWith(expr, StringComparison.InvariantCultureIgnoreCase)
+* equals(expr) : an alias to C# the_string.Equals(expr)
+* equalsi(expr) : an alias to C# the_string.Equals(expr, StringComparison.InvariantCultureIgnoreCase) 
 * isempty() : an alias to C# String.IsNullOrEmpty(the_string)
-* greaterthan(expr, format) : compares String.Format(format, expr) to the_string. returns if .CompareTo > 0;
-* lessthan(expr, format) : compares String.Format(format, expr) to the_string. returns if .CompareTo < 0;
+* greaterthan(expr, format) : returns the_string.CompareTo(String.Format(format, expr)) > 0;
+* lessthan(expr, format) : returns the_string.CompareTo(String.Format(format, expr)) < 0;
 
 Logical Operators:
 
