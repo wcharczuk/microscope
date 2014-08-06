@@ -37,7 +37,7 @@ lessthan("3.14", "float")
 ```
 Note: in this example we provide a type to tell the evaluator how to handle the comparison.
 
-If dates are after 2014:
+If dates are after May 1st, 2014:
 
 ```microscope
 greaterthan("2014-05-01", "datetime", "yyyy-MM-dd");
