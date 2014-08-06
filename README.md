@@ -1,6 +1,6 @@
 #Microscope#
 
-Microscope is a flexible yet minimal text evaluation language that compiles to native lambdas. It is useful in evaluating large numbers of strings (URLs, large chunks of text, etc.)
+Microscope is a flexible yet minimal text evaluation language that compiles to native lambdas. It is useful in evaluating large numbers of strings (URLs, Dates, etc.)
 
 ###Why do this?###
 
