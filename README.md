@@ -4,7 +4,21 @@ Microscope is a flexible yet minimal text evaluation language that compiles to n
 
 ###Why do this?###
 
-It is hard to do complex logical operations in most regular expression engines (.net's included). Microscope acts as a layer above regular expressions that lets you combine operations logically, producing cleaner expressions that are easier to maintain.
+It is hard to do complex logical operations in most regular expression engines (.net's included). Microscope acts as a layer above regular expressions that lets you combine operations logically, producing cleaner expressions that are easier to maintain. It also lets you do things like compare date values, which can be hard to do in regular expressions.
+
+###When would we use this?###
+
+When you're storing regular expressions as strings, and changing them over time, and are running into limits in their functionality or having maintainability problems. 
+
+We use them to filter urls mostly, and the filters are updated over time in the database so that we don't have to constantly patch code.
+
+###What does this not do?###
+
+**It doesn't replace regexes**
+
+Pure and simple, Microscope is an extension to regexes *when they're used to validate or filter strings*. It doesn't cover use cases such as extraction.
+
+If you can get the job done with just regexes, keep using them.
 
 ###Installation###
 
