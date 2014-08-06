@@ -12,6 +12,8 @@ When you're storing regular expressions as strings, and changing them over time,
 
 We use them to filter urls mostly, and the filters are updated over time in the database so that we don't have to constantly patch code.
 
+Did we mention it's relatively fast once compiled?
+
 ###What does this not do?###
 
 **It doesn't replace regexes**
