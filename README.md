@@ -33,7 +33,7 @@ Text that contains "product" or "service" and doesn't contain "google":
 If numbers are less than "3.14":
 
 ```microscope
-less("3.14", "float")
+lessthan("3.14", "float")
 ```
 Note: in this example we provide a type to tell the evaluator how to handle the comparison.
 
