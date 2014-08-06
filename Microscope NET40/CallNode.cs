@@ -9,6 +9,11 @@ namespace Microscope
 {
     public class CallNode : Node
     {
+        public CallNode()
+        {
+            this.Arguments = new List<string>();
+        }
+
         public override ExpressionType ExpressionType
         {
             get
@@ -19,6 +24,6 @@ namespace Microscope
         }
 
         public String MethodName { get; set; }
-        public String Argument { get; set; }
+        public List<String> Arguments { get; set; }
     }
 }

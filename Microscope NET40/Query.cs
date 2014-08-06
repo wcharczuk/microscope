@@ -136,11 +136,17 @@ namespace Microscope
                                 }
                                 else
                                 {
-                                    if (c == '\'' || c == '"') { quote = c; word += c; continue; }
-                                    else if (c == '(')
+
+                                    if (c == '(')
                                     {
                                         word += c;
                                         brace_count = 1;
+                                    }
+                                    else if (c == '\'' || c == '"') 
+                                    { 
+                                        quote = c; 
+                                        word += c; 
+                                        continue;
                                     }
                                     else if (char.IsWhiteSpace(c) && brace_count == 0)
                                     {
@@ -537,6 +543,7 @@ namespace Microscope
 
             var method = string.Empty;
             var argument = string.Empty;
+            var arguments = new List<String>();
 
             char start_quote_char = default(char);
 
@@ -572,15 +579,16 @@ namespace Microscope
                             }
                             else if (c == ')')
                             {
-                                state = -1;
-                                continue;
+                                break;
                             }
-                            else { continue; }
                         }
+                        continue; 
                     case 2:
                         {
                             if (c.Equals(start_quote_char))
                             {
+                                arguments.Add(argument);
+                                argument = string.Empty;
                                 state = 3;
                                 continue;
                             }
@@ -592,11 +600,13 @@ namespace Microscope
                         }
                     case 3:
                         {
-                            if (x == sub_query.Length) { throw new ParserException("Reached the end of the sub query looking for a closing ')' for the function call"); }
-
                             if (c == ')')
                             {
-                                state = -1;
+                                break;
+                            }
+                            else if (c == ',')
+                            {
+                                state = 1;
                                 continue;
                             }
                         }
@@ -609,7 +619,7 @@ namespace Microscope
             if (!ValidKeywords.Contains(method.ToLower())) { throw new ParserException("Invalid Function: " + method); }
 
             call_node.MethodName = String.Format("_{0}", method.ToLower());
-            call_node.Argument = argument;
+            call_node.Arguments = arguments;
 
             return call_node;
         }
@@ -655,13 +665,20 @@ namespace Microscope
 
         private Expression VisitCall(CallNode node, ParameterExpression the_string)
         {
-            if (String.IsNullOrWhiteSpace(node.Argument))
+            if (node.Arguments.Any())
             {
-                return Expression.Call(typeof(QueryEvaluator), node.MethodName, null, the_string);
+                var argument_constants = new List<Expression>();
+
+                foreach (var argument in node.Arguments)
+                {
+                    argument_constants.Add(Expression.Constant(argument));
+                }
+
+                return Expression.Call(typeof(QueryEvaluator), node.MethodName, null, the_string, argument_constants.ToArray());
             }
             else
             {
-                return Expression.Call(typeof(QueryEvaluator), node.MethodName, null, the_string, Expression.Constant(node.Argument));
+                return Expression.Call(typeof(QueryEvaluator), node.MethodName, null, the_string);
             }
         }
 
@@ -671,59 +688,74 @@ namespace Microscope
             return Expression.Not(expr);
         }
 
-        private static bool _isEmpty(string corpus)
+        static bool _isEmpty(string corpus)
         {
             return String.IsNullOrWhiteSpace(corpus);
         }
 
-        private static bool _contains(string corpus, string expression)
+        static bool _contains(string corpus, string expression)
         {
             return corpus.Contains(expression);
         }
 
-        private static bool _containsi(string corpus, string expression)
+        static bool _containsi(string corpus, string expression)
         {
 			return corpus.IndexOf(expression, StringComparison.InvariantCultureIgnoreCase) >= 0;
         }
         
-        private static bool _startswith(string corpus, string expression)
+        static bool _startswith(string corpus, string expression)
         {
             return corpus.StartsWith(expression);
         }
 
-        private static bool _startswithi(string corpus, string expression)
+        static bool _startswithi(string corpus, string expression)
         {
             return corpus.StartsWith(expression, StringComparison.InvariantCultureIgnoreCase);
         }
 
-        private static bool _endswith(string corpus, string expression)
+        static bool _endswith(string corpus, string expression)
         {
             return corpus.EndsWith(expression);
         }
 
-        private static bool _endswithi(string corpus, string expression)
+        static bool _endswithi(string corpus, string expression)
         {
             return corpus.EndsWith(expression, StringComparison.InvariantCultureIgnoreCase);
         }
 
-        private static bool _matches(string corpus, string expression)
+        static bool _matches(string corpus, string expression)
         {
             return System.Text.RegularExpressions.Regex.IsMatch(corpus, expression);
         }
 
-        private static bool _matchesi(string corpus, string expression)
+        static bool _matchesi(string corpus, string expression)
         {
             return System.Text.RegularExpressions.Regex.IsMatch(corpus, expression, System.Text.RegularExpressions.RegexOptions.IgnoreCase);
         }
 
-        private static bool _equals(string corpus, string expression)
+        static bool _equals(string corpus, string expression)
         {
             return corpus.Equals(expression);
         }
 
-        private static bool _equalsi(string corpus, string expression)
+        static bool _equalsi(string corpus, string expression)
         {
             return corpus.Equals(expression, StringComparison.InvariantCultureIgnoreCase);
+        }
+
+        static bool _equals(string corpus, string expression, string format)
+        {
+            return corpus.Equals(String.Format(format, expression));
+        }
+
+        static bool _greaterthan(string corpus, string expression, string format)
+        {
+            return corpus > String.Format(format, expression);
+        }
+
+        static bool _lessthan(string corpus, string expression, string format)
+        {
+            return corpus < String.Format(format, expression);
         }
     }
 }

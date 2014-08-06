@@ -26,6 +26,22 @@ namespace Microscope.Test
 			Assert.False(microscope.Evaluate("http://www.google.com/product"));
 		}
 
+        [Test]
+        public void Parse_BackReference_Test()
+        {
+            var query = "matches('^(?=.*?product)((?!service).)*$')";
+            var microscope = new QueryEvaluator();
+
+            var query_tree = microscope.Parse(query);
+            Assert.NotNull(query_tree);
+
+            microscope.ParseAndCompile(query);
+
+            Assert.True(microscope.Evaluate("test product test"));
+            Assert.False(microscope.Evaluate("test product service test"));
+            Assert.False(microscope.Evaluate("test service test"));
+        }
+
 		[Test]
 		public void Parse_Numbers_Test()
 		{
@@ -112,14 +128,17 @@ namespace Microscope.Test
         [Test]
         public void Parse_MultipleBlocks_Or_Test()
         {
-            var query = "(contains('test') or contains('will')) and not contains('google') and not contains('clotheshorse')";
+            var query = "startswith('http') and (contains('product') and not contains('service')) or (contains('google') and not contains('filter') and endswith('jsp'))";
+
             var m2 = new QueryEvaluator(query);
-            Assert.True(m2.Evaluate("test words win"));
-            Assert.True(m2.Evaluate("will words win"));
-            Assert.False(m2.Evaluate("will google win"));
-            Assert.False(m2.Evaluate("test google win"));
-            Assert.False(m2.Evaluate("will clotheshorse win"));
-            Assert.False(m2.Evaluate("test clotheshorse win"));
+            Assert.True(m2.Evaluate("http://something.com/product"));
+            Assert.False(m2.Evaluate("nothttp://something.com/product"));
+            Assert.False(m2.Evaluate("http://something.com/product/service"));
+            Assert.True(m2.Evaluate("http://something.com/google.jsp"));
+            Assert.True(m2.Evaluate("http://something.com/else/google.jsp"));
+            Assert.False(m2.Evaluate("http://something.com/google/filter.jsp"));
+            Assert.False(m2.Evaluate("http://something.com/google/filter/something.jsp"));
+            Assert.False(m2.Evaluate("http://something.com/google"));
         }
 
 		[Test]
