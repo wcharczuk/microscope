@@ -30,6 +30,12 @@ Text that contains "product" or "service" and doesn't contain "google":
 (contains("product") or contains("service")) and not contains("google")
 ```
 
+If dates are greater than "2012-07-04":
+
+```microscope
+greaterthan("2012-07-04", "{0:d}")
+```
+
 Example Usage:
 
 ```C#
