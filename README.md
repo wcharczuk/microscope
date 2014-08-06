@@ -33,7 +33,7 @@ Text that contains "product" or "service" and doesn't contain "google":
 If dates are greater than "2012-07-04":
 
 ```microscope
-greaterthan("2012-07-04", "{0:d}")
+greaterthan("2012-07-04")
 ```
 
 Example Usage:
@@ -62,8 +62,8 @@ Assert.False(evaluator.Evaluate("http://something.com/product/50"));
 * equalsi(expr) : an alias to C# the_string.Equals(expr, StringComparison.InvariantCultureIgnoreCase) 
 * isempty() : an alias to C# String.IsNullOrEmpty(the_string)
 * equals(expr, format) : returns the_string.Equals(String.Format(format, expr))
-* greaterthan(expr, format) : returns the_string.CompareTo(String.Format(format, expr)) > 0;
-* lessthan(expr, format) : returns the_string.CompareTo(String.Format(format, expr)) < 0;
+* greaterthan(expr) : returns the_string.CompareTo(expr) > 0;
+* lessthan(expr) : returns the_string.CompareTo(expr) < 0;
 
 Logical Operators:
 
