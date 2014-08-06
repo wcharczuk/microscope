@@ -50,6 +50,22 @@ namespace Microscope
             "not"
         };
 
+        public static HashSet<String> SupportedTypes = new HashSet<String>()
+        {
+            "datetime",
+            "guid",
+            "double",
+            "float",
+            "single",
+            "int64",
+            "long",
+            "int",
+            "int32",
+            "short",
+            "int16",
+            "byte"
+        };
+
         private String _query = null;
         private Func<String, Boolean> _compiledDelegate = null;
 
@@ -747,19 +763,96 @@ namespace Microscope
             return corpus.Equals(expression, StringComparison.InvariantCultureIgnoreCase);
         }
 
-        static bool _equals(string corpus, string expression, string format)
+        static object _typeFromStringWithFormat(string type, string format, string corpus)
         {
-            return corpus.Equals(String.Format(format, expression));
+            object value = null;
+
+            switch (type.ToLower())
+            {
+                case "datetime":
+                    if (!String.IsNullOrEmpty(format))
+                    {
+                        value = DateTime.ParseExact(corpus, format, System.Globalization.CultureInfo.InvariantCulture);
+                    }
+                    else
+                    {
+                        value = DateTime.Parse(corpus);
+                    }
+                    break;
+                case "double":
+                    value = Double.Parse(corpus);
+                    break;
+                case "single":
+                case "float":
+                    value = Single.Parse(corpus);
+                    break;
+                case "long":
+                case "int64":
+                    value = Int64.Parse(corpus);
+                    break;
+                case "int":
+                case "int32":
+                    value = Int32.Parse(corpus);
+                    break;
+                case "short":
+                case "int16":
+                    value = Int16.Parse(corpus);
+                    break;
+                case "byte":
+                    value = Byte.Parse(corpus);
+                    break;
+                case "guid":
+                    if (!String.IsNullOrEmpty(format))
+                    {
+                        value = Guid.ParseExact(corpus, format);
+                    }
+                    else
+                    {
+                        value = Guid.Parse(corpus);
+                    }
+                    break;
+                default:
+                    throw new ArgumentException("Unsupported / Invalid Type!", "type");
+            }
+
+            return value;
         }
 
+        static bool _equals(string corpus, string expression, string type)
+        {
+            var the_value = _typeFromStringWithFormat(type, null, corpus) as IComparable;
+            var the_expression_value = _typeFromStringWithFormat(type, null, expression) as IComparable;
+
+            return the_value.CompareTo(the_expression_value) == 0;
+        }
+
+        static bool _equals(string corpus, string expression, string type, string format)
+        {
+            var the_value = _typeFromStringWithFormat(type, format, corpus) as IComparable;
+            var the_expression_value = _typeFromStringWithFormat(type, format, expression) as IComparable;
+
+            return the_value.CompareTo(the_expression_value) == 0;
+        }
+            
         static bool _greaterthan(string corpus, string expression)
         {
             return corpus.CompareTo(expression) > 0;
         }
-
-        static bool _greaterthan(string corpus, string expression, string format)
+            
+        static bool _greaterthan(string corpus, string expression, string type)
         {
-            return corpus.CompareTo(String.Format(format, expression)) > 0;
+            var the_value = _typeFromStringWithFormat(type, null, corpus) as IComparable;
+            var the_expression_value = _typeFromStringWithFormat(type, null, expression) as IComparable;
+
+            return the_value.CompareTo(the_expression_value) > 0;
+        }
+
+        static bool _greaterthan(string corpus, string expression, string type, string format)
+        {
+            var the_value = _typeFromStringWithFormat(type, format, corpus) as IComparable;
+            var the_expression_value = _typeFromStringWithFormat(type, format, expression) as IComparable;
+
+            return the_value.CompareTo(the_expression_value) > 0;
         }
 
         static bool _lessthan(string corpus, string expression)
@@ -767,9 +860,20 @@ namespace Microscope
             return corpus.CompareTo(expression) < 0;
         }
 
-        static bool _lessthan(string corpus, string expression, string format)
+        static bool _lessthan(string corpus, string expression, string type)
         {
-            return corpus.CompareTo(String.Format(format, expression)) < 0;
+            var the_value = _typeFromStringWithFormat(type, null, corpus) as IComparable;
+            var the_expression_value = _typeFromStringWithFormat(type, null, expression) as IComparable;
+
+            return the_value.CompareTo(the_expression_value) > 0;
+        }
+
+        static bool _lessthan(string corpus, string expression, string type, string format)
+        {
+            var the_value = _typeFromStringWithFormat(type, format, corpus) as IComparable;
+            var the_expression_value = _typeFromStringWithFormat(type, format, expression) as IComparable;
+
+            return the_value.CompareTo(the_expression_value) > 0;
         }
     }
 }

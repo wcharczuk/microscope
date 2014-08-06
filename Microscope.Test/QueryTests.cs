@@ -410,13 +410,33 @@ namespace Microscope.Test
 		}
 
         [Test]
-        public void GreaterThan_Test()
+        public void GreaterThan_Literal_Test()
         {
-            var q = new QueryEvaluator("greaterthan('2014-08-06', '{0:d}')");
+            var q = new QueryEvaluator("greaterthan('2014-08-06')");
 
             Assert.True(q.Evaluate("2014-08-07"));
             Assert.False(q.Evaluate("2014-08-06"));
             Assert.False(q.Evaluate("2014-08-05"));
+        }
+
+        [Test]
+        public void GreaterThan_Typed_Test()
+        {
+            var q = new QueryEvaluator("greaterthan('2014-08-06', 'datetime')");
+
+            Assert.True(q.Evaluate("2014-08-07"));
+            Assert.False(q.Evaluate("2014-08-06"));
+            Assert.False(q.Evaluate("2014-08-05"));
+        }
+
+        [Test]
+        public void GreaterThan_Typed_Format_Test()
+        {
+            var q = new QueryEvaluator("greaterthan('08-06-2014', 'datetime', 'MM-dd-YYYY')");
+
+            Assert.True(q.Evaluate("08-07-2014"));
+            Assert.False(q.Evaluate("08-06-2014"));
+            Assert.False(q.Evaluate("08-05-2014"));
         }
 
         [Test]
