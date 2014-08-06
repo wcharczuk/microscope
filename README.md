@@ -4,7 +4,7 @@ Microscope is a flexible yet minimal text evaluation language that compiles to n
 
 ###Why do this?###
 
-It is hard to do complex logical operations in most regular expression engines (.net's not withstanding). Microscope acts as a layer above regular expressions that lets you combine operations logically, producing cleaner expressions that are easier to maintain.
+It is hard to do complex logical operations in most regular expression engines (.net's included). Microscope acts as a layer above regular expressions that lets you combine operations logically, producing cleaner expressions that are easier to maintain.
 
 ###Installation###
 
