@@ -444,11 +444,11 @@ namespace Microscope.Test
         [Test]
         public void GreaterThan_Typed_Format_Test()
         {
-            var q = new QueryEvaluator("greaterthan('08-06-2014', 'datetime', 'MM-dd-yyyy')");
+            var q = new QueryEvaluator("greaterthan('2014', 'datetime', 'yyyy')");
 
-            Assert.True(q.Evaluate("08-07-2014"));
-            Assert.False(q.Evaluate("08-06-2014"));
-            Assert.False(q.Evaluate("08-05-2014"));
+            Assert.True(q.Evaluate("08-07-2015"));
+            Assert.False(q.Evaluate("08-06-2013"));
+            Assert.False(q.Evaluate("08-05-2012"));
         }
 
         [Test]

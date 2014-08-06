@@ -772,7 +772,14 @@ namespace Microscope
                 case "datetime":
                     if (!String.IsNullOrEmpty(format))
                     {
-                        value = DateTime.ParseExact(corpus, format, System.Globalization.CultureInfo.InvariantCulture);
+                        try
+                        {
+                            value = DateTime.ParseExact(corpus, format, System.Globalization.CultureInfo.InvariantCulture);
+                        }
+                        catch (FormatException)
+                        {
+                            value = DateTime.Parse(corpus);
+                        }
                     }
                     else
                     {
