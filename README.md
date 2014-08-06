@@ -26,7 +26,7 @@ If you can get the job done with just regexes, keep using them.
 
 
 ```bash
-> install-package microscope
+pm> install-package microscope
 ```
 
 Or download the source and compile the binary yourself and add it as a reference.
