@@ -30,11 +30,19 @@ Text that contains "product" or "service" and doesn't contain "google":
 (contains("product") or contains("service")) and not contains("google")
 ```
 
-If dates are greater than "2012-07-04":
+If numbers are greater than "3.14":
 
 ```microscope
-greaterthan("2012-07-04")
+greaterthan("3.14", "double")
 ```
+Note: in this example we provide a type to tell the evaluator how to handle the comparison.
+
+If dates are after 2014:
+
+```microscope
+greaterthan("2014", "datetime", "yyyy");
+```
+Note: *any* date we feed this now will only compare the year involved.
 
 Example Usage:
 
