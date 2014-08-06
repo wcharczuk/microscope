@@ -40,9 +40,9 @@ Note: in this example we provide a type to tell the evaluator how to handle the 
 If dates are after 2014:
 
 ```microscope
-greaterthan("2014", "datetime", "yyyy");
+greaterthan("2014-05-01", "datetime", "yyyy-MM-dd");
 ```
-Note: *any* date we feed this now will only compare the year involved.
+Note: the format tells the parser how to evaluate the argument date. if that format fails for the input date, it'll try a regular parse.
 
 Example Usage:
 
