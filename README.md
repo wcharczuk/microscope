@@ -2,9 +2,9 @@
 
 Microscope is a flexible yet minimal text evaluation language that compiles to native lambdas. It is useful in evaluating large numbers of strings (URLs, large chunks of text, etc.)
 
-Why do this?
+###Why do this?###
 
-Regular expressions are pretty bad at testing if text has certain elements, but doesn't contain other elements. Microscope acts as a layer above regular expressions that lets you combine operations logically.
+Regular expressions are pretty bad at testing if text has certain elements, but doesn't contain other elements. Microscope acts as a layer above regular expressions that lets you combine operations logically, producing cleaner expressions that are easier to maintain.
 
 ###Installation###
 
