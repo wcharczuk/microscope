@@ -30,10 +30,10 @@ Text that contains "product" or "service" and doesn't contain "google":
 (contains("product") or contains("service")) and not contains("google")
 ```
 
-If numbers are greater than "3.14":
+If numbers are less than "3.14":
 
 ```microscope
-greaterthan("3.14", "double")
+less("3.14", "float")
 ```
 Note: in this example we provide a type to tell the evaluator how to handle the comparison.
 
