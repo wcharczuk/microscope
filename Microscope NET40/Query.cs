@@ -752,9 +752,19 @@ namespace Microscope
             return corpus.Equals(String.Format(format, expression));
         }
 
+        static bool _greaterthan(string corpus, string expression)
+        {
+            return corpus.CompareTo(expression) > 0;
+        }
+
         static bool _greaterthan(string corpus, string expression, string format)
         {
             return corpus.CompareTo(String.Format(format, expression)) > 0;
+        }
+
+        static bool _lessthan(string corpus, string expression)
+        {
+            return corpus.CompareTo(expression) < 0;
         }
 
         static bool _lessthan(string corpus, string expression, string format)
