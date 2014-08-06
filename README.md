@@ -30,11 +30,19 @@ Text that contains "product" or "service" and doesn't contain "google":
 (contains("product") or contains("service")) and not contains("google")
 ```
 
-If dates are greater than "2012-07-04":
+If numbers are greater than "3.14":
 
 ```microscope
-greaterthan("2012-07-04")
+greaterthan("3.14", "double")
 ```
+Note: in this example we provide a type to tell the evaluator how to handle the comparison.
+
+If dates are after 2014:
+
+```microscope
+greaterthan("2014", "datetime", "yyyy");
+```
+Note: *any* date we feed this now will only compare the year involved.
 
 Example Usage:
 
@@ -61,9 +69,11 @@ Assert.False(evaluator.Evaluate("http://something.com/product/50"));
 * equals(expr) : an alias to C# the_string.Equals(expr)
 * equalsi(expr) : an alias to C# the_string.Equals(expr, StringComparison.InvariantCultureIgnoreCase) 
 * isempty() : an alias to C# String.IsNullOrEmpty(the_string)
-* equals(expr, format) : returns the_string.Equals(String.Format(format, expr))
+* equals(expr, type) : returns the_string parsed as the specified type compared to expr parsed as the specified type
 * greaterthan(expr) : returns the_string.CompareTo(expr) > 0;
+* greaterthan(expr, type) : returns the_string parsed as the specified type, compared to expr, parsed as the specified type
 * lessthan(expr) : returns the_string.CompareTo(expr) < 0;
+* lessthan(expr, type) : returns the_string parsed as the specified type, compared to expr, parsed as the specified type
 
 Logical Operators:
 
