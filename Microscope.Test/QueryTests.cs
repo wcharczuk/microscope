@@ -410,6 +410,13 @@ namespace Microscope.Test
 		}
 
         [Test]
+        public void Equals_Typed_Test()
+        {
+            var DOUBLE = new QueryEvaluator("equals('5.00000000000000000000001', 'double')");
+            Assert.True(DOUBLE.Evaluate("5.0"));
+        }
+
+        [Test]
         public void GreaterThan_Literal_Test()
         {
             var q = new QueryEvaluator("greaterthan('2014-08-06')");
@@ -427,12 +434,17 @@ namespace Microscope.Test
             Assert.True(q.Evaluate("2014-08-07"));
             Assert.False(q.Evaluate("2014-08-06"));
             Assert.False(q.Evaluate("2014-08-05"));
+
+            var q2 = new QueryEvaluator("greaterthan('5.0', 'double')");
+            Assert.True(q2.Evaluate("6.0"));
+            Assert.False(q2.Evaluate("5.0"));
+            Assert.False(q2.Evaluate("4.0"));
         }
 
         [Test]
         public void GreaterThan_Typed_Format_Test()
         {
-            var q = new QueryEvaluator("greaterthan('08-06-2014', 'datetime', 'MM-dd-YYYY')");
+            var q = new QueryEvaluator("greaterthan('08-06-2014', 'datetime', 'MM-dd-yyyy')");
 
             Assert.True(q.Evaluate("08-07-2014"));
             Assert.False(q.Evaluate("08-06-2014"));
@@ -440,13 +452,38 @@ namespace Microscope.Test
         }
 
         [Test]
-        public void LessThan_Test()
+        public void LessThan_Literal_Test()
         {
-            var q = new QueryEvaluator("lessthan('2014-08-06', '{0:d}')");
+            var q = new QueryEvaluator("lessthan('2014-08-06')");
 
             Assert.True(q.Evaluate("2014-08-05"));
             Assert.False(q.Evaluate("2014-08-06"));
             Assert.False(q.Evaluate("2014-08-07"));
+        }
+
+        [Test]
+        public void LessThan_Typed_Test()
+        {
+            var q = new QueryEvaluator("lessthan('2014-08-06', 'datetime')");
+
+            Assert.True(q.Evaluate("2014-08-05"));
+            Assert.False(q.Evaluate("2014-08-06"));
+            Assert.False(q.Evaluate("2014-08-07"));
+
+            var q2 = new QueryEvaluator("lessthan('5.0', 'double')");
+            Assert.True(q2.Evaluate("4.0"));
+            Assert.False(q2.Evaluate("5.0"));
+            Assert.False(q2.Evaluate("6.0"));
+        }
+
+        [Test]
+        public void LessThan_Typed_Format_Test()
+        {
+            var q = new QueryEvaluator("lessthan('08-06-2014', 'datetime', 'MM-dd-yyyy')");
+
+            Assert.True(q.Evaluate("08-05-2014"));
+            Assert.False(q.Evaluate("08-06-2014"));
+            Assert.False(q.Evaluate("08-07-2014"));
         }
 	}
 }

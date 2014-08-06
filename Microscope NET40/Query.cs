@@ -865,7 +865,7 @@ namespace Microscope
             var the_value = _typeFromStringWithFormat(type, null, corpus) as IComparable;
             var the_expression_value = _typeFromStringWithFormat(type, null, expression) as IComparable;
 
-            return the_value.CompareTo(the_expression_value) > 0;
+            return the_value.CompareTo(the_expression_value) < 0;
         }
 
         static bool _lessthan(string corpus, string expression, string type, string format)
@@ -873,7 +873,7 @@ namespace Microscope
             var the_value = _typeFromStringWithFormat(type, format, corpus) as IComparable;
             var the_expression_value = _typeFromStringWithFormat(type, format, expression) as IComparable;
 
-            return the_value.CompareTo(the_expression_value) > 0;
+            return the_value.CompareTo(the_expression_value) < 0;
         }
     }
 }
