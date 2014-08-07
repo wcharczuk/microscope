@@ -2,11 +2,7 @@
 
 Microscope is a flexible yet minimal text evaluation language that compiles to native lambdas. It is useful in evaluating large numbers of strings (URLs, dates, etc.)
 
-###Why do this?###
-
-It is hard to do complex logical operations in most regular expression engines (.net's included). Microscope acts as a layer above regular expressions that lets you combine operations logically, producing cleaner expressions that are easier to maintain. It also lets you do things like compare date values, which can be hard to do in regular expressions.
-
-###When would we use this?###
+###When would I use this?###
 
 When you're storing regular expressions as strings, and changing them over time, and are running into limits in their functionality or having maintainability problems. 
 
