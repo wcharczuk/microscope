@@ -321,11 +321,11 @@ namespace Microscope.Test
 		[Test]
 		public void StartsWith_Test()
 		{
-			var q = new QueryEvaluator("startswith('word')");
+			var q = new QueryEvaluator("startswith('/')");
 
-			Assert.True(q.Evaluate("word is a bird"));
-			Assert.False(q.Evaluate("there is not a word"));
-			Assert.False(q.Evaluate("WORD is a bird"));
+			Assert.True(q.Evaluate("/is_a_bird"));
+			Assert.False(q.Evaluate("there is not a /"));
+			Assert.False(q.Evaluate("WORD is / a bird"));
 		}
 
 		[Test]

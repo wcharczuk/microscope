@@ -532,15 +532,26 @@ namespace Microscope
             if (working_binary_node != null) { root_node = working_binary_node; }
             else
             {
-                var words = further_reduced_query.Split(' ');
-                for (int x = 0; x < words.Length; x++)
+                if(further_reduced_query.Contains(" "))
                 {
-                    var word = words[x];
-                    if (word[0] == '@')
+                    var words = further_reduced_query.Split(' ');
+                    for (int x = 0; x < words.Length; x++)
+                    {
+                        var word = words[x];
+                        if (word[0] == '@')
+                        {
+                            var node = nodes[word];
+                            root_node = node;
+                            break;
+                        }
+                    }
+                }
+                else {
+                    var word = further_reduced_query;
+                    if(word[0] == '@')
                     {
                         var node = nodes[word];
                         root_node = node;
-                        break;
                     }
                 }
             }
