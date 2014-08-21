@@ -11,6 +11,30 @@ namespace Microscope.Test
 	[TestFixture]
 	public class QueryTests
 	{
+        [Test]
+        public void Parse_Whitespace_Test()
+        {
+            var didthrow = false;
+            try
+            {
+                var scope = new Microscope.QueryEvaluator(@"
+startswith('/')");
+            }
+            catch { didthrow = true; }
+
+            Assert.False(didthrow);
+
+            didthrow = false;
+            try
+            {
+                var scope = new Microscope.QueryEvaluator(@"startswith('/')
+");
+            }
+            catch { didthrow = true; }
+
+            Assert.False(didthrow);
+        }
+
 		[Test]
 		public void Parse_NoLogic_Test()
 		{

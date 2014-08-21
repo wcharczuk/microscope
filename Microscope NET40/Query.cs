@@ -91,7 +91,7 @@ namespace Microscope
 
         public Node Parse(string query)
         {
-            return _parse_block(query);
+            return _parse_block(query.Trim());
         }
 
         private Node _parse_block(string query)
