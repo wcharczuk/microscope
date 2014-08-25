@@ -168,7 +168,7 @@ namespace Microscope
                                     }
                                     else if (char.IsWhiteSpace(c) && brace_count == 0)
                                     {
-                                        if (!LogicKeywords.Contains(function_name))
+                                        if (!LogicKeywords.Contains(function_name.ToLower()))
                                         {
                                             throw new ParserException(String.Format("Whitespace before () in function call {0} at [{1}]", function_name, x));
                                         }
@@ -187,7 +187,7 @@ namespace Microscope
 
                                         if (c == ')') { brace_count = 0; }
 
-                                        if (!LogicKeywords.Contains(word))
+                                        if (!LogicKeywords.Contains(word.ToLower()))
                                         {
                                             var node = _parse_call(word);
                                             var node_id = _get_id();

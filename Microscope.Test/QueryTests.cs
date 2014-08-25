@@ -150,6 +150,23 @@ startswith('/')");
 		}
 
         [Test]
+        public void Parse_LogicCapitalization_Test()
+        {
+            var query = "startswith('http') AND (contains('product') OR contains('google'))";
+
+            var m = new QueryEvaluator(query);
+            Assert.True(m.Evaluate("http://something.com/product"));
+            Assert.True(m.Evaluate("http://google.com/product"));
+            Assert.True(m.Evaluate("http://google.com"));
+
+            Assert.False(m.Evaluate("ftp://google.com"));
+            Assert.False(m.Evaluate("ftp://something.com/product"));
+            Assert.False(m.Evaluate("ftp://google.com/product"));
+
+            Assert.False(m.Evaluate("random string"));
+        }
+
+        [Test]
         public void Parse_MultipleBlocks_Or_Test()
         {
             var query = "startswith('http') and (contains('product') and not contains('service')) or (contains('google') and not contains('filter') and endswith('jsp'))";
