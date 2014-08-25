@@ -25,5 +25,13 @@ namespace Microscope
 
         public String MethodName { get; set; }
         public List<String> Arguments { get; set; }
+
+        public override string ToString()
+        {
+            return String.Format("{0}({1})", 
+                this.MethodName, 
+                String.Join(",", this.Arguments.Select(_ => String.Format("'{0}'", _)).ToArray())
+            );
+        }
     }
 }

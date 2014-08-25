@@ -167,6 +167,27 @@ startswith('/')");
         }
 
         [Test]
+        public void Parse_ComplicatedQueryRegression_Test()
+        {
+            var query = "matches('(jcrew.com)') and (contains('mens_category') or contains('womens_category')) and not (contains('shoes'))";
+            var m = new QueryEvaluator();
+
+            var tree = m.Parse(query);
+
+            var qp = tree.ToString();
+
+            Assert.NotNull(tree);
+
+            var fun = m.Compile(tree);
+
+            Assert.True(fun("http://jcrew.com/mens_category/SPIFFY.jsp"));
+            Assert.True(fun("http://jcrew.com/womens_category/SPIFFY.jsp"));
+            Assert.False(fun("http://jcrew.com/mens_category/shoes/SPIFFY.jsp"));
+            Assert.False(fun("http://jcrew.com/womens_category/shoes/SPIFFY.jsp"));
+            Assert.False(fun("http://jcrew.com"));
+        }
+
+        [Test]
         public void Parse_MultipleBlocks_Or_Test()
         {
             var query = "startswith('http') and (contains('product') and not contains('service')) or (contains('google') and not contains('filter') and endswith('jsp'))";

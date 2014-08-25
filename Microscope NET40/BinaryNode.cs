@@ -10,5 +10,10 @@ namespace Microscope
     {
         public Node Left { get; set; }
         public Node Right { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("({0} {1} {2})", this.Left.ToString(), this.ExpressionType.ToString().ToUpper(), this.Right.ToString());
+        }
     }
 }

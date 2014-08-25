@@ -19,5 +19,10 @@ namespace Microscope
         }
 
         public Node Node { get; set; }
+
+        public override string ToString()
+        {
+            return String.Format("NOT({0})", this.Node.ToString());
+        }
     }
 }
